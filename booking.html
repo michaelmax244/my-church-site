@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحة الحجز</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #eef;
+      padding: 30px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      direction: rtl;
+    }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+    input.valid {
+  border: 2px solid #28a745;
+  background-color: #e6f7eb;
+}
+ body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input.valid {
+      border-color: green;
+    }
+
+    input.invalid {
+      border-color: red;
+    }
+        body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 300px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input.valid {
+      border-color: green;
+    }
+
+    input.invalid {
+      border-color: red;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+
+form {
+  background: #ffffffcc;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+}
+
+input:focus, select:focus {
+  border-color: #607d8b;
+  background-color: #f9f9f9;
+}
+
+input.valid {
+  border-color: #4caf50;
+  background-color: #e8f5e9;
+}
+
+input.invalid {
+  border-color: #f44336;
+  background-color: #ffebee;
+}
+
+button {
+  background-color: #7ba7bd;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+}
+
+  </style>
+
+  <style>
+  .hidden {
+    display: none;
+  }
+</style>
+
+</head>
+
+<h2 id="church-title" style="text-align: center; margin-top: 20px;"></h2>
+
+<body>
+  <div class="container">
+
+    <!-- اسم الكاهن -->
+    <label>اسم الكاهن</label>
+    <input type="text" id="priestName" oninput="showChurch()">
+
+    <!-- اسم الكنيسة -->
+    <div id="churchDiv" class="hidden">
+      <label>اسم الكنيسة</label>
+      <input type="text" id="churchName" oninput="showPhone()">
+    </div>
+
+    <!-- رقم التليفون -->
+    <div id="phoneDiv" class="hidden">
+      <label>رقم التليفون</label>
+      <input type="text" id="phone" oninput="showPeople()">
+    </div>
+
+    <!-- عدد الأفراد -->
+    <div id="peopleDiv" class="hidden">
+      <label>عدد الأفراد</label>
+      <input type="number" id="peopleCount" oninput="showDates()">
+    </div>
+    <div id="datesDiv" class="hidden">
+      <label>موعد القدوم</label>
+      <select id="arrivalMonth">
+        <option disabled selected>اختر الشهر</option>
+        <option value="1">يناير</option>
+        <option value="2">فبراير</option>
+        <option value="3">مارس</option>
+        <option value="4">أبريل</option>
+        <option value="5">مايو</option>
+        <option value="6">يونيو</option>
+        <option value="7">يوليو</option>
+        <option value="8">أغسطس</option>
+        <option value="9">سبتمبر</option>
+        <option value="10">أكتوبر</option>
+        <option value="11">نوفمبر</option>
+        <option value="12">ديسمبر</option>
+      </select>
+      <select id="arrivalDay">
+        <option disabled selected>اختر اليوم</option>
+        <option value="1">يوم 1 </option>
+        <option value="2">يوم 2</option>
+        <option value="3">يوم 3</option>
+        <option value="4">يوم 4</option>
+        <option value="5">يوم 5</option>
+        <option value="6">يوم 6</option>
+        <option value="7">يوم 7</option>
+        <option value="8">يوم 8</option>
+        <option value="9">يوم 9</option>
+        <option value="10">يوم 10</option>
+        <option value="11">يوم 11</option>
+        <option value="12">يوم 12</option>
+        <option value="13">يوم 13</option>
+        <option value="14">يوم 14</option>
+        <option value="15">يوم 15</option>
+        <option value="16">يوم 16</option>
+        <option value="17">يوم 17</option>
+        <option value="18">يوم 18</option>
+        <option value="19">يوم 19</option>
+        <option value="20">يوم 20</option>
+        <option value="21">يوم 21</option>
+        <option value="22">يوم 22</option>
+        <option value="23">يوم 23</option>
+        <option value="24">يوم 24</option>
+        <option value="25">يوم 25</option>
+        <option value="26">يوم 26</option>
+        <option value="27">يوم 27</option>
+        <option value="28">يوم 28</option>
+        <option value="29">يوم 29</option>
+        <option value="30">يوم 30</option>
+      </select>
+
+      <label>موعد المغادرة</label>
+      <select id="leaveMonth">
+        <option disabled selected>اختر الشهر</option>
+        <option value="1">يناير</option>
+        <option value="2">فبراير</option>
+        <option value="3">مارس</option>
+        <option value="4">أبريل</option>
+        <option value="5">مايو</option>
+        <option value="6">يونيو</option>
+        <option value="7">يوليو</option>
+        <option value="8">أغسطس</option>
+        <option value="9">سبتمبر</option>
+        <option value="10">أكتوبر</option>
+        <option value="11">نوفمبر</option>
+        <option value="12">ديسمبر</option>
+      </select>
+      <select id="leaveDay">
+        <option disabled selected>اختر اليوم</option>
+        <option value="1">يوم 1 </option>
+        <option value="2">يوم 2</option>
+        <option value="3">يوم 3</option>
+        <option value="4">يوم 4</option>
+        <option value="5">يوم 5</option>
+        <option value="6">يوم 6</option>
+        <option value="7">يوم 7</option>
+        <option value="8">يوم 8</option>
+        <option value="9">يوم 9</option>
+        <option value="10">يوم 10</option>
+        <option value="11">يوم 11</option>
+        <option value="12">يوم 12</option>
+        <option value="13">يوم 13</option>
+        <option value="14">يوم 14</option>
+        <option value="15">يوم 15</option>
+        <option value="16">يوم 16</option>
+        <option value="17">يوم 17</option>
+        <option value="18">يوم 18</option>
+        <option value="19">يوم 19</option>
+        <option value="20">يوم 20</option>
+        <option value="21">يوم 21</option>
+        <option value="22">يوم 22</option>
+        <option value="23">يوم 23</option>
+        <option value="24">يوم 24</option>
+        <option value="25">يوم 25</option>
+        <option value="26">يوم 26</option>
+        <option value="27">يوم 27</option>
+        <option value="28">يوم 28</option>
+        <option value="29">يوم 29</option>
+        <option value="30">يوم 30</option>
+      </select>
+    </div>
+
+  
+
+<script>
+   // استرجاع الاسم من localStorage
+  const churchName = localStorage.getItem("selectedChurch");
+
+  // عرض الاسم في عنوان الصفحة
+  document.getElementById("church-title").textContent = churchName || "لم يتم اختيار كنيسة";
+  function showForm() {
+      const church = document.getElementById("church").value;
+      const formSection = document.getElementById("formSection");
+      if (church) {
+        formSection.classList.remove("hidden");
+      } else {
+        formSection.classList.add("hidden");
+      }
+    }
+
+    function submitForm() {
+      const church = document.getElementById("church").value;
+      const priest = document.getElementById("priestName").value;
+      const members = document.getElementById("members").value;
+      const phone = document.getElementById("phone").value;
+
+      if (church && priest && members && phone) {
+        alert(`تم إرسال الحجز للكنيسة: ${church}\nاسم الكاهن: ${priest}\nعدد الأفراد: ${members}\nرقم التليفون: ${phone}`);
+      } else {
+        alert("من فضلك املأ جميع الحقول");
+      }
+    }
+    function showPhone() {
+      const name = document.getElementById("priestName").value;
+      if (name.trim() !== "") {
+        document.getElementById("phoneDiv").classList.remove("hidden");
+      }
+    }
+
+    function showPeople() {
+      const phone = document.getElementById("phone").value;
+      if (phone.trim() !== "") {
+        document.getElementById("peopleDiv").classList.remove("hidden");
+      }
+    }
+
+    function showDates() {
+      const count = document.getElementById("peopleCount").value;
+      if (count.trim() !== "") {
+        document.getElementById("datesDiv").classList.remove("hidden");
+        document.getElementById("submitBtn").classList.remove("hidden");
+      }
+    }
+    const phoneInput = document.getElementById("phone");
+
+    phoneInput.addEventListener("blur", () => {
+      const phoneValue = phoneInput.value.trim();
+      const isValid = /^\d{11}$/.test(phoneValue);
+
+      if (isValid) {
+        phoneInput.classList.remove("invalid");
+        phoneInput.classList.add("valid");
+      } else {
+        phoneInput.classList.remove("valid");
+        phoneInput.classList.add("invalid");
+      }
+    });
+    // دالة التحقق من الاسم
+    nameInput.addEventListener("blur", function () {
+      if (nameInput.value.trim().length > 0) {
+        nameInput.classList.add("valid");
+        nameInput.classList.remove("invalid");
+      } else {
+        nameInput.classList.add("invalid");
+        nameInput.classList.remove("valid");
+      }
+    });
+
+    // دالة التحقق من رقم الهاتف
+    phoneInput.addEventListener("blur", function () {
+      const phone = phoneInput.value.trim();
+      const isValid = /^\d{11}$/.test(phone);
+      if (isValid) {
+        phoneInput.classList.add("valid");
+        phoneInput.classList.remove("invalid");
+      } else {
+        phoneInput.classList.add("invalid");
+        phoneInput.classList.remove("valid");
+      }
+    });
+
+    // دالة التحقق من عدد الأفراد
+    peopleInput.addEventListener("blur", function () {
+      if (peopleInput.value.trim().length > 0 && !isNaN(peopleInput.value)) {
+        peopleInput.classList.add("valid");
+        peopleInput.classList.remove("invalid");
+      } else {
+        peopleInput.classList.add("invalid");
+        peopleInput.classList.remove("valid");
+      }
+    });
+    const attendeesInput = document.getElementById("attendees");
+
+attendeesInput.addEventListener("blur", function () {
+  const value = parseInt(this.value);
+  if (!isNaN(value) && value > 0 && value <= 1000) {
+    this.classList.remove("border-red-500");
+    this.classList.add("border-green-500");
+  } else {
+    this.classList.remove("border-green-500");
+    this.classList.add("border-red-500");
+  }
+});
+const nameInput = document.getElementById("name");
+
+nameInput.addEventListener("blur", function () {
+  if (this.value.trim() !== "") {
+    this.classList.remove("border-red-500");
+    this.classList.add("border-green-500");
+  } else {
+    this.classList.remove("border-green-500");
+    this.classList.add("border-red-500");
+  }
+});
+document.getElementById("bookingForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // تحقّق من صحة البيانات
+  if (nameInput.classList.contains("valid") &&
+      phoneInput.classList.contains("valid") &&
+      membersInput.classList.contains("valid")) {
+        
+    document.getElementById("successMessage").style.display = "block";
+
+    // تقدر تضيف هنا إرسال البيانات لسيرفر أو بريد إلكتروني
+  } else {
+    alert("من فضلك تأكد من صحة جميع البيانات قبل الإرسال.");
+  }
+});
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault(); // يمنع الإرسال العادي
+    alert("لقد تم الإرسال وشكرًا"); // يظهر الرسالة
+    window.location.href = "index.html"; // يرجع للصفحة الرئيسية (غيّرها حسب اسم الصفحة الرئيسية لو مش index.html)
+  });
+  window.location.href = "index.html";
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault(); // يمنع الإرسال الفعلي
+      alert("لقد تم الإرسال وشكرًا");
+      window.location.href = "index.html"; // عدّل الرابط لو صفحتك الرئيسية اسمها مختلف
+    });
+
+
+nameInput.addEventListener('blur', () => {
+  if (nameInput.value.trim() !== '') {
+    nameInput.classList.add('valid');
+    nameInput.classList.remove('invalid');
+  } else {
+    nameInput.classList.remove('valid');
+  }
+});
+
+phoneInput.addEventListener('blur', () => {
+  const phoneValue = phoneInput.value.trim();
+  const isValid = /^01\d{9}$/.test(phoneValue);
+  if (isValid) {
+    phoneInput.classList.add('valid');
+    phoneInput.classList.remove('invalid');
+  } else {
+    phoneInput.classList.add('invalid');
+    phoneInput.classList.remove('valid');
+  }
+});
+
+phoneInput.addEventListener('input', () => {
+  if (phoneInput.value.length > 11) {
+    phoneInput.value = phoneInput.value.slice(0, 11);
+  }
+});
+
+numberInput.addEventListener('input', () => {
+  if (parseInt(numberInput.value) > 1000) {
+    numberInput.value = 1000;
+  }
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const phoneValid = /^01\d{9}$/.test(phoneInput.value.trim());
+  if (!phoneValid || nameInput.value.trim() === '') {
+    alert('من فضلك أدخل البيانات بشكل صحيح');
+    return;
+  }
+
+  alert('لقد تم إرسال البيانات بنجاح، شكراً لك ❤️');
+  window.location.href = 'index.html'; // عد للصفحة الرئيسية
+});
+
+</script>
+
+<script type="module">
+  // استيراد الوظائف من Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  // إعداد Firebase الخاص بمشروعك
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvoFHOUNYsvMbw4S5pkUG5aFJA-qfmICE",
+    authDomain: "my-coptic-church-d55bb.firebaseapp.com",
+    databaseURL: "https://my-coptic-church-d55bb-default-rtdb.firebaseio.com",
+    projectId: "my-coptic-church-d55bb",
+    storageBucket: "my-coptic-church-d55bb.appspot.com",
+    messagingSenderId: "27856252983",
+    appId: "1:27856252983:web:a385e6f1722f27c021cfb2",
+    measurementId: "G-FLBQDF4VW9"
+  };
+
+  // تفعيل Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+// لما يدوس على زر الإرسال
+window.sendBooking = function () {
+  const name = document.getElementById("priestName").value;
+  const phone = document.getElementById("phone").value;
+  const people = document.getElementById("peopleCount").value;
+  const arrivalMonth = document.getElementById("arrivalMonth").value;
+  const arrivalDay = document.getElementById("arrivalDay").value;
+  const leaveMonth = document.getElementById("leaveMonth").value;
+  const leaveDay = document.getElementById("leaveDay").value;
+  const churchName = localStorage.getItem("selectedChurch") || "غير محددة";
+
+  if (!name || !phone || !people || !arrivalMonth || !arrivalDay || !leaveMonth || !leaveDay) {
+    alert("من فضلك املأ كل البيانات.");
+    return;
+  }
+
+  const bookingRef = ref(database, "bookings");
+  const newBookingRef = push(bookingRef);
+
+  set(newBookingRef, {
+    church: churchName, // ✅ إضافة اسم الكنيسة هنا
+    name: name,
+    phone: phone,
+    people: parseInt(people),
+    arrival: `${arrivalDay}-${arrivalMonth}`,
+    leave: `${leaveDay}-${leaveMonth}`
+  }).then(() => {
+    alert("تم إرسال البيانات بنجاح. شكراً!");
+    window.location.href = "index.html";
+  }).catch((error) => {
+    alert("حدث خطأ أثناء إرسال البيانات: " + error.message);
+  });
+};
+
+
+</script>
+
+<script>
+  function showChurch() {
+    const priestName = document.getElementById("priestName").value.trim();
+    if (priestName !== "") {
+      document.getElementById("churchDiv").classList.remove("hidden");
+    }
+  }
+
+  function showPhone() {
+    const churchName = document.getElementById("churchName").value.trim();
+    if (churchName !== "") {
+      document.getElementById("phoneDiv").classList.remove("hidden");
+    }
+  }
+
+  function showPeople() {
+    const phone = document.getElementById("phone").value.trim();
+    if (phone !== "") {
+      document.getElementById("peopleDiv").classList.remove("hidden");
+    }
+  }
+
+  function showDates() {
+    const peopleCount = document.getElementById("peopleCount").value.trim();
+    if (peopleCount !== "") {
+      document.getElementById("datesDiv").classList.remove("hidden");
+    }
+  }
+
+  function submitForm() {
+    const priestName = document.getElementById("priestName").value;
+    const churchName = document.getElementById("churchName").value;
+    const phone = document.getElementById("phone").value;
+    const peopleCount = document.getElementById("peopleCount").value;
+    const arrivalDate = document.getElementById("arrivalDate").value;
+    const departureDate = document.getElementById("departureDate").value;
+
+    // كود إرسال البيانات إلى Firebase
+    const firebaseConfig = {
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com" // عدل الرابط حسب مشروعك
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const bookingRef = db.ref("bookings").push();
+    bookingRef.set({
+      priestName,
+      churchName,
+      phone,
+      peopleCount,
+      arrivalDate,
+      departureDate
+    }).then(() => {
+      document.getElementById("thanksMessage").style.display = "block";
+    });
+  }
+  
+</script>
+
+<button onclick="sendBooking()">إرسال</button>
+
+
+
+
+</body>
+</html>

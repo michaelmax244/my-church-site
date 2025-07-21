@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختيار الكنائس</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom, #f3f4f6, #e0e0e0);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 40px 20px 20px;
+      color: #2c3e50;
+      font-size: 32px;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #ccc;
+      position: relative;
+      animation: fadeDown 1s ease forwards;
+    }
+
+    .church-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+
+    .church-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: scale(0.95);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .church-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+
+    .church-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: filter 0.3s;
+    }
+
+    .church-card img:hover {
+      filter: brightness(0.9);
+    }
+
+    .church-card h3 {
+      color: #34495e;
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    .church-card button {
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .church-card button:hover {
+      background-color: #e68900;
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+.hero-text {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 40px;
+  color: #fff;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+  font-weight: 700;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 50px; /* مسافة تحت الكلام */
+  letter-spacing: 2px; /* تباعد بين الحروف */
+  line-height: 1.4;
+  animation: fadeInDown 1.2s ease-out;
+  background: rgba(0, 0, 0, 0.3);
+padding: 15px 20px;
+border-radius: 12px;
+display: inline-block;
+
+}
+
+.hero-text::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 10px;
+  margin-top: 20px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, transparent 80%);
+}
+.hero-text {
+  background: url('cross-icon.png') no-repeat center left;
+  padding-left: 40px;
+  background-size: 30px;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .search-container input {
+    width: 60%;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: 0.3s;
+  }
+
+  .highlight {
+    border: 3px solid #ff9800 !important;
+    box-shadow: 0 0 15px #ffc107;
+    transition: all 0.5s ease-in-out;
+  }
+  </style>
+</head>
+<body>
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="ابحث عن كنيستك..." oninput="searchChurch()" />
+</div>
+
+  <h1>✝ اختر كنيستك ✝</h1>
+
+  <div id="churchList" class="church-list"></div>
+
+  <script>
+const churches = [
+  { name: "كنيسة مارجرجس طوخ", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارجرجس قها", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة القديسة دميانة ميت كنانة", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارجرجس واالنبا كاراس نوى", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة المالك ميخائيل القشيش", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء وأبى سيفين السمانية", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء ومارمرقس كفر شبين", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارجرجس منية شبين", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارمينا ساحل دجوى", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء وأبى سيفين دجوى", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارجرجس بلتان", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة  المالك ميخائيل القلزم", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة البابا كيرلس الحصافة", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء وأبى سيفين الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارمينا والبابا كيرلس الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة األنبا أبرآم واألنبا كاراس الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة البابا أثناسيوس واألنبا بيشوى الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والمالك ميخائيل الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مذبح العذراء والشهيد ونس أرض عيشة", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء واألنبا موسى الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة مارجرجس والبابا ديسقوروس الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء وماريوحنا الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء ويوسف النجار", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والرسولين بطرس وبولس", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والشهيد أبانوب الخصوص", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء وماريمينا والبابا كيرلس الجبل الاصفر", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة ماريجرجس أبي زعبل", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والانبا بيشوي المنية", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والقديس أبانوب القلج", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء و الأمير تادرس ومارجرجس القلج", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والملاك ميخائيل العكرشة", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء والبابا بطرس الخانكة", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة ابي سيفين و القديسة دميانة القلج", image: "images/كنيسة 22.jpg" },
+  { name: "كنيسة العذراء مساكن أبي زعبل", image: "images/كنيسة 22.jpg" },
+
+];
+
+    const listContainer = document.getElementById("churchList");
+
+    churches.forEach((church) => {
+      const div = document.createElement("div");
+      div.className = "church-card";
+      div.innerHTML = `
+        <img src="${church.image}" alt="${church.name}" />
+        <h3>${church.name}</h3>
+        <button onclick="bookChurch('${church.name}')">احجز الآن</button>
+      `;
+      listContainer.appendChild(div);
+    });
+
+    function bookChurch(name) {
+      localStorage.setItem("selectedChurch", name);
+      window.location.href = "booking.html";
+    }
+    
+    function searchChurch() {
+  const query = document.getElementById("searchInput").value.trim();
+  const cards = document.querySelectorAll(".church-card");
+  let found = false;
+
+  cards.forEach(card => {
+    card.classList.remove("highlight");
+    const name = card.querySelector("h3").textContent;
+    if (query && name.includes(query)) {
+      if (!found) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.classList.add("highlight");
+        found = true;
+      }
+    }
+  });
+}
+
+  </script>
+
+
+</body>
+</html>
