@@ -55,10 +55,10 @@
       display: none;
     }
     input.valid {
-  border: 2px solid #28a745;
-  background-color: #e6f7eb;
-}
- body {
+      border: 2px solid #28a745;
+      background-color: #e6f7eb;
+    }
+    body {
       font-family: Arial, sans-serif;
       padding: 20px;
     }
@@ -86,7 +86,7 @@
     input.invalid {
       border-color: red;
     }
-        body {
+    body {
       font-family: sans-serif;
       padding: 20px;
       background: #f0f0f0;
@@ -131,88 +131,76 @@
       background-color: #0056b3;
     }
 
+    form {
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+      animation: fadeIn 1s ease-in-out;
+    }
 
-form {
-  background: #ffffffcc;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  max-width: 500px;
-  margin: auto;
-  animation: fadeIn 1s ease-in-out;
-}
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      transition: all 0.3s ease-in-out;
+      font-size: 16px;
+    }
 
-input, select, button {
-  display: block;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  transition: all 0.3s ease-in-out;
-  font-size: 16px;
-}
+    input:focus, select:focus {
+      border-color: #607d8b;
+      background-color: #f9f9f9;
+    }
 
-input:focus, select:focus {
-  border-color: #607d8b;
-  background-color: #f9f9f9;
-}
+    input.valid {
+      border-color: #4caf50;
+      background-color: #e8f5e9;
+    }
 
-input.valid {
-  border-color: #4caf50;
-  background-color: #e8f5e9;
-}
+    input.invalid {
+      border-color: #f44336;
+      background-color: #ffebee;
+    }
 
-input.invalid {
-  border-color: #f44336;
-  background-color: #ffebee;
-}
+    button {
+      background-color: #7ba7bd;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-button {
-  background-color: #7ba7bd;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-body {
-  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-  min-height: 100vh;
-  margin: 0;
-  font-family: 'Cairo', sans-serif;
-}
-
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+    }
   </style>
 
   <style>
-  .hidden {
-    display: none;
-  }
-</style>
-
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <h2 id="church-title" style="text-align: center; margin-top: 20px;"></h2>
 
 <body>
   <div class="container">
-
     <!-- اسم الكاهن -->
     <label>اسم الكاهن</label>
-    <input type="text" id="priestName" oninput="showChurch()">
-
-    <!-- اسم الكنيسة -->
-    <div id="churchDiv" class="hidden">
-      <label>اسم الكنيسة</label>
-      <input type="text" id="churchName" oninput="showPhone()">
-    </div>
+    <input type="text" id="priestName" oninput="showPhone()">
 
     <!-- رقم التليفون -->
     <div id="phoneDiv" class="hidden">
@@ -225,6 +213,8 @@ body {
       <label>عدد الأفراد</label>
       <input type="number" id="peopleCount" oninput="showDates()">
     </div>
+    
+    <!-- مواعيد الحجز -->
     <div id="datesDiv" class="hidden">
       <label>موعد القدوم</label>
       <select id="arrivalMonth">
@@ -327,24 +317,18 @@ body {
       </select>
     </div>
 
-  
+    <button onclick="sendBooking()">إرسال</button>
+  </div>
 
   <script>
     // استرجاع الاسم من localStorage
     const churchName = localStorage.getItem("selectedChurch");
     document.getElementById("church-title").textContent = churchName ? `حجز زيارة ${churchName}` : "حجز زيارة الكنيسة";
 
-    // وظائف إظهار الحقول
-    function showChurch() {
+    // وظائف إظهار الحقول المعدلة
+    function showPhone() {
       const priestName = document.getElementById("priestName").value.trim();
       if (priestName !== "") {
-        document.getElementById("churchDiv").classList.remove("hidden");
-      }
-    }
-
-    function showPhone() {
-      const churchName = document.getElementById("churchName").value.trim();
-      if (churchName !== "") {
         document.getElementById("phoneDiv").classList.remove("hidden");
       }
     }
@@ -407,7 +391,7 @@ body {
     // منع إدخال أكثر من 1000 فرد
     document.getElementById("peopleCount").addEventListener("input", function() {
       if (parseInt(this.value) > 1000) {
-        this.value = 10000;
+        this.value = 1000;
       }
     });
   </script>
@@ -477,11 +461,5 @@ body {
       });
     };
   </script>
-
-<button onclick="sendBooking()">إرسال</button>
-
-
-
-
 </body>
 </html>
